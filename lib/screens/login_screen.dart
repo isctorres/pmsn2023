@@ -38,6 +38,16 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
+    final btnEntrar = FloatingActionButton.extended(
+      icon: Icon(Icons.login),
+      label: Text('Entrar'),
+      onPressed: () => 
+      Navigator.pushNamed(context, '/dash')
+      /*(){
+        Navigator.pushNamed(context, '/dash');
+      }*/
+    );
+
     
     return Scaffold(
       body: Container(
@@ -76,6 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+      floatingActionButtonLocation: 
+      FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: btnEntrar,
     );
   }
 }
