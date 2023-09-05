@@ -1,3 +1,4 @@
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -26,12 +27,21 @@ class DashboardScreen extends StatelessWidget {
             accountEmail: Text('isctorres@gmail.com')
           ),
           ListTile(
-            leading: Image.network('https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/fruit-organic-plant-orange-vitamin-64.png'),
+            //leading: Image.network('https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/fruit-organic-plant-orange-vitamin-64.png'),
+            leading: Image.asset('assets/naranja.png'),
             trailing: Icon(Icons.chevron_right),
             title: Text('FruitApp'),
             subtitle: Text('Carrusel'),
             onTap: (){},
-          )
+          ),
+          /*DayNightSwitcher(
+            isDarkModeEnabled: isDarkModeEnabled,
+            onStateChanged: (isDarkModeEnabled) {
+              setState(() {
+                this.isDarkModeEnabled = isDarkModeEnabled;
+              });
+            },
+          ),*/
         ],
       ),
     );
