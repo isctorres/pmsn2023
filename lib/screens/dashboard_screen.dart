@@ -1,8 +1,9 @@
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:pmsn20232/assets/global_values.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +35,12 @@ class DashboardScreen extends StatelessWidget {
             subtitle: Text('Carrusel'),
             onTap: (){},
           ),
-          /*DayNightSwitcher(
-            isDarkModeEnabled: isDarkModeEnabled,
+          DayNightSwitcher(
+            isDarkModeEnabled: GlobalValues.flagTheme.value,
             onStateChanged: (isDarkModeEnabled) {
-              setState(() {
-                this.isDarkModeEnabled = isDarkModeEnabled;
-              });
+                GlobalValues.flagTheme.value = isDarkModeEnabled;
             },
-          ),*/
+          ),
         ],
       ),
     );
