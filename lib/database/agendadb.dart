@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:pmsn20232/models/task_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -31,8 +32,8 @@ class AgendaDB {
       idTask INTEGER PRIMARY KEY,
       nameTask VARCHAR(50),
       dscTask VARCHAR(50),
-      sttTask BYTE,
-    )''';
+      sttTask BYTE
+    );''';
     db.execute(query);
   }
 
@@ -55,9 +56,10 @@ class AgendaDB {
       whereArgs: [idTask]);
   }
 
-  Future<List<?>> GETALLTASK() async{
+  Future<List<TaskModel>> GETALLTASK() async{
     var conexion = await database;
-    conexion.query('tblTask');
+    var result = await conexion!.query('tblTareas');
+    return result.map((task)=>TaskModel.fromMap(task)).toList();
   }
 
 }
