@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pmsn20232/database/agendadb.dart';
 import 'package:pmsn20232/models/task_model.dart';
+import 'package:pmsn20232/widgets/CardTaskWidget.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -26,7 +27,11 @@ class _TaskScreenState extends State<TaskScreen> {
         title: Text('Task Manager'),
         actions: [
           IconButton(
-            onPressed: (){}, 
+            onPressed: ()=>Navigator.pushNamed(context, '/add')
+              .then((value){
+                setState(() {});
+              }
+            ), 
             icon: Icon(Icons.task)
           )
         ],
@@ -34,11 +39,11 @@ class _TaskScreenState extends State<TaskScreen> {
       body: FutureBuilder(
         future: agendaDB!.GETALLTASK(),
         builder: (BuildContext context, AsyncSnapshot<List<TaskModel>> snapshot){
-          if( snapshot.hasData ){
+          if( snapshot.hasData){
             return ListView.builder(
-              itemCount: 5 ,//snapshot.data!.length,
+              itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index){
-                return Text('hOLa');
+                return CardTaskWidget(taskModel: snapshot.data![index],);
               }
             );
           }else{
