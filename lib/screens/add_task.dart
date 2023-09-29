@@ -78,18 +78,35 @@ class _AddTaskState extends State<AddTask> {
     final ElevatedButton btnGuardar = 
       ElevatedButton(
         onPressed: (){
-          agendaDB!.INSERT('tblTareas', {
-            'nameTask' : txtConName.text,
-            'dscTask' : txtConDsc.text,
-            'sttTask' : dropDownValue!.substring(0,1)
-          }).then((value){
-            var msj = ( value > 0 ) 
-              ? 'La inserción fue exitosa!'
-              : 'Ocurrió un error';
-            var snackbar = SnackBar(content: Text(msj));
-            ScaffoldMessenger.of(context).showSnackBar(snackbar);
-            Navigator.pop(context);
-          });
+          if( widget.taskModel == null ){
+            agendaDB!.INSERT('tblTareas', {
+              'nameTask' : txtConName.text,
+              'dscTask' : txtConDsc.text,
+              'sttTask' : dropDownValue!.substring(0,1)
+            }).then((value){
+              var msj = ( value > 0 ) 
+                ? 'La inserción fue exitosa!'
+                : 'Ocurrió un error';
+              var snackbar = SnackBar(content: Text(msj));
+              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              Navigator.pop(context);
+            });
+          }
+          else{
+            agendaDB!.UPDATE('tblTareas', {
+              'idTask' : widget.taskModel!.idTask,
+              'nameTask' : txtConName.text,
+              'dscTask' : txtConDsc.text,
+              'sttTask' : dropDownValue!.substring(0,1)
+            }).then((value) {
+              var msj = ( value > 0 ) 
+                ? 'La actualización fue exitosa!'
+                : 'Ocurrió un error';
+              var snackbar = SnackBar(content: Text(msj));
+              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              Navigator.pop(context);
+            });
+          }
         }, 
         child: Text('Save Task')
       );
