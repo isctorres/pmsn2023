@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmsn20232/assets/global_values.dart';
 import 'package:pmsn20232/database/agendadb.dart';
 import 'package:pmsn20232/models/task_model.dart';
 
@@ -99,6 +100,7 @@ class _AddTaskState extends State<AddTask> {
               'dscTask' : txtConDsc.text,
               'sttTask' : dropDownValue!.substring(0,1)
             }).then((value) {
+              GlobalValues.flagTask.value = !GlobalValues.flagTask.value;
               var msj = ( value > 0 ) 
                 ? 'La actualización fue exitosa!'
                 : 'Ocurrió un error';
