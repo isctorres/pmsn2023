@@ -39,7 +39,7 @@ class DashboardScreen extends StatelessWidget {
             leading: Icon(Icons.task_alt_outlined),
             trailing: Icon(Icons.chevron_right),
             title: Text('Task Manager'),
-            onTap: () => Navigator.pushNamed(context, '/task'),
+            onTap: () => Navigator.pushNamed(context, '/popular'),
           ),
           DayNightSwitcher(
             isDarkModeEnabled: GlobalValues.flagTheme.value,
