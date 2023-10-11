@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pmsn20232/models/popular_model.dart';
 import 'package:pmsn20232/network/api_popular.dart';
@@ -29,7 +31,14 @@ class _PopularScreenState extends State<PopularScreen> {
         future: apiPopular!.getAllPopular(),
       builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
           if( snapshot.hasData){
-            return ListView.builder(
+            return GridView.builder(
+              padding: const EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2 ,
+                childAspectRatio: .9,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return itemMovieWidget(snapshot.data![index]);

@@ -38,7 +38,9 @@ class PopularModel {
       posterPath: map['poster_path'] ?? '',
       releaseDate: map['release_date'],
       title: map['title'],
-      //voteAverage: map['vote_average'],
+      voteAverage: ( map['vote_average'] is int ) 
+        ? (map['vote_average'] as int).toDouble()
+        : map['vote_average'],
       voteCount: map['vote_count']
     );
   }
