@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmsn20232/firebase/email_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,6 +9,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final emailAuth = EmailAuth();
+
   @override
   Widget build(BuildContext context) {
 
@@ -41,14 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
     final btnEntrar = FloatingActionButton.extended(
       icon: Icon(Icons.login),
       label: Text('Entrar'),
-      onPressed: () => 
-      Navigator.pushNamed(context, '/dash')
-      /*(){
-        Navigator.pushNamed(context, '/dash');
-      }*/
+      onPressed: () async {
+        bool res = await emailAuth.validateUser(emailUser: txtConUser.text, pwdUser: txtConPass.text);
+        print(bool);
+        if( res ){
+          Navigator.pushNamed(context, '/dash');
+        }
+      }
     );
 
-    
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -81,7 +86,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              imgLogo
+              //imgLogo,
+              TextButton(
+                onPressed: ()=>Navigator.pushNamed(context, '/register'), 
+                child: Text('Registrarse :)', 
+                  style: TextStyle(fontSize: 20, decoration: TextDecoration.underline),)
+              ),
             ],
           ),
         ),
